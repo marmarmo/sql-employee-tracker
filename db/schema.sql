@@ -15,6 +15,7 @@ CREATE TABLE roles (
 	id INTO NOT NULL AUTO_INCREMENT,
 	job_title VARCHAR(30) NOT NULL,
 	salary DECIMAL,
+	--assign child tabe > departments
 	department_id INTO NULL,
 	PRIMARY KEY (id)
 );
@@ -24,7 +25,9 @@ CREATE TABLE employees (
 	id INTO NOT NULL AUTO_INCREMENT,
 	first_name VARCHAR(30),
 	last_name VARCHAR(30),
+	--assign child table to roles
 	role_id INT NULL,
+	--need to reference the id values of another employee in this table who is manager to this employee
 	manager_id INT NULL,
 	PRIMARY KEY (id)
 );
