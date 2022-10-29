@@ -1,7 +1,10 @@
+//import inquirer
 const inquierer = require("inquirer");
-const db = require("..config/connection");
+// const db = require("..config/connection"); do i need?
+//import console.table package
 const ctable = require('console.table');
-const { default: inquirer } = require("inquirer");
+//import mysql
+const mysql = require('mysql2');
 
 const promptUser = () => {
 	inquirer.prompt ([
