@@ -86,7 +86,22 @@ const promptUser = () => {
 	})
 };
 	
+//funtion to view all deartments
+showDepartments = () => {
 
+};
+
+//funciton to view all roles
+showRoles = () => {
+
+};
+
+//function to view all employees
+showEmployees = () => {
+
+};
+
+//add a department
 const addDepartment = [
 	{
 		type: "input",
@@ -94,3 +109,49 @@ const addDepartment = [
 		message: "What is the name of the department?",
 	},
 ];
+
+//add a role
+const addRole = () => {
+
+};
+
+//add an employee
+const addEmployee = () => {
+
+};
+
+//update an employe role
+updateEmployee = () => {
+
+};
+
+//update an employee manager
+const updateManager = () => {
+
+};
+
+//view all employees by department
+const viewEmployees = () => {
+
+};
+
+//delete a department
+deleteDepartment = () => {
+
+}
+
+//delete a role
+deleteRole = () => {
+
+};
+
+//delete an employee
+deleteEmployee = () => {
+
+};
+
+//view all departments budgets
+viewBudgets = () => {
+
+};
+
