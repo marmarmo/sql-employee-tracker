@@ -1,10 +1,10 @@
 //import inquirer
 const inquierer = require("inquirer");
-// const db = require("..config/connection"); do i need?
 //import console.table package
 const ctable = require('console.table');
 //import mysql
 const mysql = require('mysql2');
+
 
 const promptUser = () => {
 	inquirer.prompt ([
@@ -105,22 +105,67 @@ showEmployees = () => {
 };
 
 //add a department
-const addDepartment = [
+addDepartment = () => {
+	inquirer.prompt([
 	{
 		type: "input",
 		name : "departmentName",
-		message: "What is the name of the department?",
-	},
-];
+		message: "What is the name of the department you'd like to add?",
+	}
+])
+};
 
 //add a role
-const addRole = () => {
+addRole = () => {
+	inquierer.prompt([
+	{
+		type: "input",
+		name: "roleName",
+		message: "What is the name of the role you'd like to add?"
+	},
+	{
+		type: "input",
+		name: "roleSalary",
+		message: "What is the salary of the named role?",
+	},
+	{
+		type: "input",
+		name: "roleDepartment",
+		message: "What department is the role loacted in?"
+	}
+])
+.then((answers) => {
 
+})
 };
 
 //add an employee
-const addEmployee = () => {
+addEmployee = () => {
+	inquirer.prompt([
+		{
+			type: "input",
+			name: "employeeFirstName",
+			message: "What is the first name of new employee?"
+		},
+		{
+			type: "input",
+			name: "employeeLastName",
+			message: "What is the last name of new employee?"
+		},
+		{
+			type: "input",
+			name: "employeeRole",
+			message: "What is the role of new employee?"
+		},
+		{
+			type: "input",
+			name: "employeeManager",
+			message: "Who is the manager of new employee?"
+		},
+	])
+	.then((answers) => {
 
+	})
 };
 
 //update an employe role
@@ -129,12 +174,12 @@ updateEmployee = () => {
 };
 
 //update an employee manager
-const updateManager = () => {
+updateManager = () => {
 
 };
 
 //view all employees by department
-const viewEmployees = () => {
+viewEmployees = () => {
 
 };
 

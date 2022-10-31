@@ -3,31 +3,28 @@ CREATE DATABASE employees_db;
 
 USE employees_db;
 
--- create parent table
 CREATE TABLE departments (
-	id INT NOT NULL,
-	department_name VARCHAR(30) NOT NULL,
-	PRIMARY KEY (id)
+	id INTEGER PRIMARY KEY AUTO_INCREMENT,
+	department_name VARCHAR(30)
 );
 
--- create roles table 
 CREATE TABLE roles (
-	id INTO NOT NULL AUTO_INCREMENT,
-	job_title VARCHAR(30) NOT NULL,
+	id INTEGER AUTO_INCREMENT PRIMARY KEY,
+	job_title VARCHAR(30),
 	salary DECIMAL,
-	--assign child tabe > departments (need more added)
-	department_id INTO NULL,
-	PRIMARY KEY (id)
+	department_id INTEGER,
+	INDEX dept_id (department_id),
+	CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES departments(id) ON DELETE SET NULL
 );
 
---create employees table
 CREATE TABLE employees (
-	id INTO NOT NULL AUTO_INCREMENT,
+	id INT AUTO_INCREMENT PRIMARY KEY,
 	first_name VARCHAR(30),
 	last_name VARCHAR(30),
-	--assign child table to roles (need more)
-	role_id INT NULL,
-	--need to reference the id values of another employee in this table who is manager to this employee
-	manager_id INT NULL,
-	PRIMARY KEY (id)
+	role_id INTEGER NOT NULL,
+	INDEX role_ind (role_id),
+	CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE,
+	manager_id INTEGER,
+	INDEX man_id (manager_id),
+	CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES employees(id) ON DELETE SET NULL
 );
