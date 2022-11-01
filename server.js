@@ -1,7 +1,7 @@
 //import inquirer
-const inquierer = require("inquirer");
+const inquirer = require('inquirer');
 //import console.table package
-const ctable = require('console.table');
+// const cTable = require('console.table');
 //import mysql
 const mysql = require('mysql2');
 
@@ -17,6 +17,7 @@ const db = mysql.createConnection(
 console.log('connected to the employees_db database')
 );
 
+//switch cases for each question //promises
 const promptUser = () => {
 	inquirer.prompt ([
 	{
@@ -40,6 +41,7 @@ const promptUser = () => {
 		]
 	}
 ])
+//maybe should be switch statement??
 	.then((answers) => {
 		const { choices } = answers;
 
@@ -100,7 +102,24 @@ const promptUser = () => {
 	})
 };
 	
+//INSTRUCTOR NOTES
+//class.db
+//constructor(connection)
+//.this connection = connection
+//return this.connection.promise().query(select * FROM WHEREEVER TO WHEREVER)
+
+//index file contains class.db
+
 //funtion to view all deartments
+//just calling class method
+//import class db.viewEmployees()
+//.then(call ack function(rows))
+//console.log responce from database
+//chain antoher .then(function loadmain prompts function)
+
+//export.module = db.class
+
+
 showDepartments = () => {
 
 };
