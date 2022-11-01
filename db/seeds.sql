@@ -7,14 +7,14 @@ VALUES
 ("Georgie Porgie"),
 ("Magistic Mountains");
 
-INSERT INTO roles (job_title, salary, department_id)
+INSERT INTO roles (job_title, salary, department_id, department_name)
 VALUES
-("Rooster Ruler", 80000, 1),
-("Mr. MoJoe", 120000, 2),
-("Galentines Guide", 90000, 4),
-("Unicorn Uniter", 75000, 3),
-("Poofer Floofer", 110000, 2),
-("Serial Sneak", 85000, 2);
+("Rooster Ruler", 80000, 1, "Team Kitty Cuddles"),
+("Mr. MoJoe", 120000, 2, "Starry Night"),
+("Galentines Guide", 90000, 4, "Georgie Porgie"),
+("Unicorn Uniter", 75000, 3, "Magistic Mountains"),
+("Poofer Floofer", 110000, 2, "Georgie Porgie"),
+("Serial Sneak", 85000, 2, "Team Kitty Cuddles");
 
 INSERT INTO employees (first_name, last_name, role_id, manager_id)
 VALUES

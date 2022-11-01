@@ -18,6 +18,10 @@ class EmployeeTracker {
 		VALUES
 		("${departmentName}");`)
 	}
+	addRole (roleName) {
+		return this.db.promise().query(`INSERT INTO roles (job_title, salary, department_id, department_name)
+		VALUES ("${roleName}");`)
+	}
 };
 
 module.exports = new EmployeeTracker(db);

@@ -2,14 +2,10 @@
 const inquirer = require('inquirer');
 //import console.table package
 const cTable = require('console.table');
+//import classes
 const db = require('./db/class');
-//get method db.show departments
 
 
-
-
-
-//switch cases for each question //promises
 const promptUser = () => {
 	inquirer.prompt ([
 	{
@@ -103,21 +99,21 @@ db.showDepartments().then(([data]) => {
 }).then(() => promptUser())
 };
 
-//funciton to view all roles
+//funciton to view all roles// need to add department name
 const showRoles = () => {
 	db.showRoles().then(([data]) => {
 		console.table(data);
 	}).then(() => promptUser())
 };
 
-//function to view all employees
+//function to view all employees// need to add salaries and job title
 const showEmployees = () => {
 	db.showEmployees().then(([data]) => {
 		console.table(data);
 	}).then(() => promptUser())
 };
 
-//add a department
+//function to add a department
 const addDepartment = () => {
 
 	inquirer.prompt([
@@ -131,7 +127,7 @@ db.addDepartment(answers.departmentName).then(() => console.log(`Successfully ad
 })
 };
 
-//add a role
+//functinon to add a role//saying cannot match value count at row 1
 const addRole = () => {
 	db.showDepartments().then(([data]) => {
 		const departmentChoices = data.map((department) => {
@@ -157,11 +153,9 @@ const addRole = () => {
 			}
 		])
 		.then((answers) => {
-			console.log(answers);
-		
+		db.addRole(answers.roleName).then(() => console.log (`Successfully added ${answers.roleName}`)).then(() => promptUser())
 		})
 	})
-
 };
 
 //add an employee

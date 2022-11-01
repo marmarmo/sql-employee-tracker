@@ -4,8 +4,9 @@ CREATE DATABASE employees_db;
 USE employees_db;
 
 CREATE TABLE departments (
-	id INTEGER PRIMARY KEY AUTO_INCREMENT,
-	department_name VARCHAR(30)
+	id INTEGER AUTO_INCREMENT,
+	department_name VARCHAR(30),
+	PRIMARY KEY (id)
 );
 
 CREATE TABLE roles (
@@ -14,6 +15,7 @@ CREATE TABLE roles (
 	salary DECIMAL,
 	department_id INTEGER,
 	INDEX dept_id (department_id),
+	INDEX dept_name (department_name),
 	CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES departments(id) ON DELETE SET NULL
 );
 
