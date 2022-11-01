@@ -1,27 +1,20 @@
 //import inquirer
 const inquirer = require('inquirer');
 //import console.table package
-// const cTable = require('console.table');
-//import mysql
-const mysql = require('mysql2');
+const cTable = require('console.table');
+const db = require('./db/class');
+//get method db.show departments
 
 
-//connet to database
-const db = mysql.createConnection(
-	{
-		host: 'localhost',
-		user: 'root',
-		password: process.env.MYSQL_PASSWORD,
-		database: 'employees_db'
-	},
-console.log('connected to the employees_db database')
-);
+
+
 
 //switch cases for each question //promises
 const promptUser = () => {
 	inquirer.prompt ([
 	{
 		type: "list",
+		name: "choices",
 		message: "Select what you would like to do.",
 		choices: [
 			"View all departments",
@@ -102,75 +95,77 @@ const promptUser = () => {
 	})
 };
 	
-//INSTRUCTOR NOTES
-//class.db
-//constructor(connection)
-//.this connection = connection
-//return this.connection.promise().query(select * FROM WHEREEVER TO WHEREVER)
-
-//index file contains class.db
-
-//funtion to view all deartments
-//just calling class method
-//import class db.viewEmployees()
-//.then(call ack function(rows))
-//console.log responce from database
-//chain antoher .then(function loadmain prompts function)
-
-//export.module = db.class
 
 
-showDepartments = () => {
-
+const showDepartments = () => {
+db.showDepartments().then(([data]) => {
+	console.table(data);
+}).then(() => promptUser())
 };
 
 //funciton to view all roles
-showRoles = () => {
-
+const showRoles = () => {
+	db.showRoles().then(([data]) => {
+		console.table(data);
+	}).then(() => promptUser())
 };
 
 //function to view all employees
-showEmployees = () => {
-
+const showEmployees = () => {
+	db.showEmployees().then(([data]) => {
+		console.table(data);
+	}).then(() => promptUser())
 };
 
 //add a department
-addDepartment = () => {
+const addDepartment = () => {
+
 	inquirer.prompt([
 	{
 		type: "input",
 		name : "departmentName",
 		message: "What is the name of the department you'd like to add?",
 	}
-])
-};
-
-//add a role
-addRole = () => {
-	inquierer.prompt([
-	{
-		type: "input",
-		name: "roleName",
-		message: "What is the name of the role you'd like to add?"
-	},
-	{
-		type: "input",
-		name: "roleSalary",
-		message: "What is the salary of the named role?",
-	},
-	{
-		type: "input",
-		name: "roleDepartment",
-		message: "What department is the role loacted in?"
-	}
-])
-.then((answers) => {
-
+]).then((answers) => {
+db.addDepartment(answers.departmentName).then(() => console.log(`Successfully addded ${answers.departmentName}`)).then(() => promptUser())
 })
 };
 
+//add a role
+const addRole = () => {
+	db.showDepartments().then(([data]) => {
+		const departmentChoices = data.map((department) => {
+		return {name: department.department_name, value: department.id}
+		})
+		console.log(departmentChoices)
+		inquirer.prompt([
+			{
+				type: "input",
+				name: "roleName",
+				message: "What is the name of the role you'd like to add?"
+			},
+			{
+				type: "input",
+				name: "roleSalary",
+				message: "What is the salary of the named role?",
+			},
+			{
+				type: "list",
+				name: "roleDepartment",
+				message: "What department is the role loacted in?",
+				choices: departmentChoices
+			}
+		])
+		.then((answers) => {
+			console.log(answers);
+		
+		})
+	})
+
+};
+
 //add an employee
-addEmployee = () => {
+const addEmployee = () => {
 	inquirer.prompt([
 		{
 			type: "input",
@@ -199,37 +194,38 @@ addEmployee = () => {
 };
 
 //update an employe role
-updateEmployee = () => {
+const updateEmployee = () => {
 
 };
 
 //update an employee manager
-updateManager = () => {
+const updateManager = () => {
 
 };
 
 //view all employees by department
-viewEmployees = () => {
+const viewEmployees = () => {
 
 };
 
 //delete a department
-deleteDepartment = () => {
+const deleteDepartment = () => {
 
 }
 
 //delete a role
-deleteRole = () => {
+const deleteRole = () => {
 
 };
 
 //delete an employee
-deleteEmployee = () => {
+const deleteEmployee = () => {
 
 };
 
 //view all departments budgets
-viewBudgets = () => {
+const viewBudgets = () => {
 
 };
 
+promptUser();
