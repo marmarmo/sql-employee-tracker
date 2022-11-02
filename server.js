@@ -98,14 +98,14 @@ db.showDepartments().then(([data]) => {
 }).then(() => promptUser())
 };
 
-//funciton to view all roles// not showing department name
+//funciton to view all roles
 const showRoles = () => {
 	db.showRoles().then(([data]) => {
 		console.table(data);
 	}).then(() => promptUser())
 };
 
-//function to view all employees// need to add salaries and job title
+//function to view all employees
 const showEmployees = () => {
 	db.showEmployees().then(([data]) => {
 		console.table(data);
@@ -150,8 +150,14 @@ const addRole = () => {
 				choices: departmentChoices
 			}
 		])
-		.then((answers) => {
-		db.addRole(answers).then(() => console.log (`Successfully added ${answers}`)).then(() => promptUser())
+		.then(({roleName, roleSalary, roleDepartment}) => {
+			let deptId;
+			for (var dept of departmentChoices) {
+				if ((dept.name = roleDepartment)) {
+					deptId = dept.value;
+				}
+			}
+		db.addRole(roleName, roleSalary, deptId).then(() => console.log (`Successfully added ${roleName, roleSalary, roleDepartment}`)).then(() => promptUser())
 		})
 	})
 };
