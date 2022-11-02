@@ -19,7 +19,7 @@ class EmployeeTracker {
 		("${departmentName}");`)
 	}
 	addRole (roleName) {
-		return this.db.promise().query(`INSERT INTO roles (job_title, salary, department_id, department_name)
+		return this.db.promise().query(`INSERT INTO roles (job_title, salary, department_id, dept_name)
 		VALUES ("${roleName}");`)
 	}
 };

@@ -115,7 +115,6 @@ const showEmployees = () => {
 
 //function to add a department
 const addDepartment = () => {
-
 	inquirer.prompt([
 	{
 		type: "input",
@@ -127,7 +126,7 @@ db.addDepartment(answers.departmentName).then(() => console.log(`Successfully ad
 })
 };
 
-//functinon to add a role//saying cannot match value count at row 1
+//functinon to add a role//not functioning when adding dept_id in field list
 const addRole = () => {
 	db.showDepartments().then(([data]) => {
 		const departmentChoices = data.map((department) => {
@@ -160,6 +159,17 @@ const addRole = () => {
 
 //add an employee
 const addEmployee = () => {
+	db.showEmployees().then(([data]) => {
+		const managerChoices = data.map((employees) => {
+		return {name: employees.first_name, name: employees.last_name, value: employees.id}
+		})
+		console.log(managerChoices)
+	db.showRoles().then(([data]) => {
+		const roleChoices = data.map((roles) => {
+			return {name: roles.job_title, value: roles.id}
+		})
+		console.log(roleChoices);
+	})
 	inquirer.prompt([
 		{
 			type: "input",
@@ -172,19 +182,23 @@ const addEmployee = () => {
 			message: "What is the last name of new employee?"
 		},
 		{
-			type: "input",
+			type: "list",
 			name: "employeeRole",
-			message: "What is the role of new employee?"
+			message: "Select the role of new employee?",
+			choices: roleChoices
 		},
 		{
-			type: "input",
+			type: "list",
 			name: "employeeManager",
-			message: "Who is the manager of new employee?"
+			message: "Who is the manager of new employee?",
+			choices: managerChoices
 		},
 	])
 	.then((answers) => {
-
+		db.showEmployees(answers.employeeRole).then(() =>
+		console.log(`Sucessfully added ${answers.employeeRole}`)).then(() => promptUser())
 	})
+})
 };
 
 //update an employe role
