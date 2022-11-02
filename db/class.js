@@ -18,10 +18,15 @@ class EmployeeTracker {
 		VALUES
 		("${departmentName}");`)
 	}
-	addRole (roleName) {
-		return this.db.promise().query(`INSERT INTO roles (job_title, salary, department_id, dept_name)
-		VALUES ("${roleName}");`)
+	addRole (roleName, roleSalary, roleDepartment) {
+		return this.db.promise().query(`SELECT employee roles (job_title, salary, department_id, department_name)
+		VALUES ("${roleName, roleSalary, roleDepartment}");`)
 	}
+	addEmployee (employeeFirstName, employeeLastName, employeeRole, employeeManager) {
+		return this.db.promise().query(`INSERT INTO employees (first_name, last_name, role_id, manager_id)
+		VALUES ("${employeeFirstName, employeeLastName, employeeRole, employeeManager}");`)
+	}
+	updateEmployee ()
 };
 
 module.exports = new EmployeeTracker(db);

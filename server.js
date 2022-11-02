@@ -92,14 +92,13 @@ const promptUser = () => {
 };
 	
 
-
 const showDepartments = () => {
 db.showDepartments().then(([data]) => {
 	console.table(data);
 }).then(() => promptUser())
 };
 
-//funciton to view all roles// need to add department name
+//funciton to view all roles// not showing department name
 const showRoles = () => {
 	db.showRoles().then(([data]) => {
 		console.table(data);
@@ -152,7 +151,7 @@ const addRole = () => {
 			}
 		])
 		.then((answers) => {
-		db.addRole(answers.roleName).then(() => console.log (`Successfully added ${answers.roleName}`)).then(() => promptUser())
+		db.addRole(answers).then(() => console.log (`Successfully added ${answers}`)).then(() => promptUser())
 		})
 	})
 };
@@ -204,7 +203,9 @@ const addEmployee = () => {
 //update an employe role
 const updateEmployee = () => {
 
-};
+}
+
+
 
 //update an employee manager
 const updateManager = () => {
@@ -223,12 +224,16 @@ const deleteDepartment = () => {
 
 //delete a role
 const deleteRole = () => {
-
+	db.showRoles().then(([data]) => {
+		console.table(data);
+	}).then(() => promptUser())
 };
 
 //delete an employee
 const deleteEmployee = () => {
-
+db.showEmployees().then(([data]) => {
+		console.table(data);
+	}).then(() => promptUser())
 };
 
 //view all departments budgets
