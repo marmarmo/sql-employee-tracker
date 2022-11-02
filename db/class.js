@@ -26,7 +26,6 @@ class EmployeeTracker {
 		return this.db.promise().query(`INSERT INTO employees (first_name, last_name, role_id, manager_id)
 		VALUES ("${employeeFirstName, employeeLastName, employeeRole, employeeManager}");`)
 	}
-	updateEmployee ()
 };
 
 module.exports = new EmployeeTracker(db);
