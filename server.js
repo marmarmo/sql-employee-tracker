@@ -58,7 +58,7 @@ const promptUser = () => {
 		}
 
 		if (choices === "Update an employee role") {
-			updateEmployee();
+			updateEmployeeRole();
 		}
 
 		if (choices === "Update an employee manager") {
@@ -125,7 +125,7 @@ db.addDepartment(answers.departmentName).then(() => console.log(`Successfully ad
 })
 };
 
-//functinon to add a role//not functioning when adding dept_id in field list
+//functinon to add a role
 const addRole = () => {
 	db.showDepartments().then(([data]) => {
 		const departmentChoices = data.map((department) => {
@@ -162,11 +162,11 @@ const addRole = () => {
 	})
 };
 
-//add an employee
+//add an employee // only shoing first name of manager choices and not showing roles list at all // not being added to employee list
 const addEmployee = () => {
 	db.showEmployees().then(([data]) => {
 		const managerChoices = data.map((employees) => {
-		return {name: employees.first_name, name: employees.last_name, value: employees.id}
+		return {name: employees.manager, value: employees.id}
 		})
 		console.log(managerChoices)
 	db.showRoles().then(([data]) => {
@@ -199,16 +199,44 @@ const addEmployee = () => {
 			choices: managerChoices
 		},
 	])
-	.then((answers) => {
-		db.showEmployees(answers.employeeRole).then(() =>
-		console.log(`Sucessfully added ${answers.employeeRole}`)).then(() => promptUser())
+	.then(({employeeFirstName, employeeLastName, employeeRole, employeeManager}) => {
+		let manId;
+		for (var man of managerChoices) {
+			if ((man.name = employeeFirstName)) {
+				manId = man.value;
+			}
+		}
+		let empId;
+		for (var emp of roleChoices) {
+			if ((emp.name = employeeFirstName)) {
+				empId = emp.value;
+			}
+		}
+		db.showEmployees(employeeFirstName, employeeLastName, employeeRole, manId).then(() =>
+		console.log(`Sucessfully added ${employeeFirstName, employeeLastName, employeeRole, employeeManager}`)).then(() => promptUser())
 	})
 })
 };
 
 //update an employe role
-const updateEmployee = () => {
-
+const updateEmployeeRole = () => {
+	db.showEmployees().then(([data]) => {
+		const employeeChoices = data.map((employee) => {
+			return {name: employee.last_name, value: employee.id}
+		})
+		console.log(employeeChoices)
+		inquirer.prompt([
+			{
+				type: "list",
+				name: "updateEmployeePrompt",
+				message: "select the employee you'd like to update.",
+				choices: employeeChoices
+			}
+		])
+		.then(({updateEmployeePrompt}) => {
+			
+		})
+	})
 }
 
 
