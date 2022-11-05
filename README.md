@@ -52,7 +52,7 @@ After cloning the GitHub repo, uses must install node.js, inquirer, console.tabl
 
 This app allows users to view, add, delete, and update employees roles, departments, and managers.
 
-See the following demo video for any additional guidence you may need. [demo video](https://drive.google.com/file/d/1uL6R8PMP-0RsODbprxr-jM8FjrAsQxC5/view)
+See the following demo video for any additional guidence you may need. [demo video](https://drive.google.com/file/d/1fUqkw4Z41YYnY8Z9nSMixQCQ6asNFNaV/view)
 
 ## License:
 
