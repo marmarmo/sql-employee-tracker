@@ -316,7 +316,7 @@ const deleteRole = () => {
 
 //delete an employee
 const nameDeleteEmployee = () => {
-	db.nameDeleteEmployee().then(([data]) => {
+	db.showEmployees().then(([data]) => {
 		const employeeChoices = data.map((employee) => {
 			return {name: `${employee.first_name} ${employee.last_name}`, value: employee.id}
 		})
