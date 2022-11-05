@@ -38,7 +38,16 @@ class EmployeeTracker {
 	}
 	addEmployee (employeeFirstName, employeeLastName, employeeRole, employeeManager) {
 		return this.db.promise().query(`INSERT INTO employees (first_name, last_name, role_id, manager_id)
-		VALUES (${employeeFirstName}, ${employeeLastName}, ${employeeRole}, ${employeeManager});`)
+		VALUES ("${employeeFirstName}", "${employeeLastName}", ${employeeRole}, ${employeeManager});`)
+	}
+	updateEmployee (roleId,id) {
+		return this.db.promise().query("UPDATE employees SET role_id = ? WHERE id = ?", [roleId, id])
+	}
+	updateManager (managerId,id) {
+		return this.db.promise().query("UPDATE employees SET manager_id = ? WHERE id = ?", [managerId, id])
+	}
+	getManagers (id) {
+		return this.db.promise().query("SELECT * FROM employees WHERE id != ?", id)
 	}
 };
 
