@@ -304,7 +304,25 @@ const viewEmployees = () => {
 
 //delete a department
 const deleteDepartment = () => {
-
+	db.showDepartments().then(([data]) => {
+		const departmentChoices = data.map((department) => {
+		return {name: department.department_name, value: department.id}
+		})
+		console.log(departmentChoices)
+		inquirer.prompt([
+			{
+				type: "list",
+				name: "departmentId",
+				message: "Which department would you like to delete? You cannot undo this!",
+				choices: departmentChoices
+			}
+		])
+		.then(({departmentId}) => {
+					db.deleteDepartment(departmentId).then(() => {
+						console.log("succesfully deleted department!")
+					}).then(() => promptUser())
+				})
+			})
 }
 
 //delete a role
@@ -330,7 +348,7 @@ const nameDeleteEmployee = () => {
 			}
 		])
 		.then(({employeeId}) => {
-					db.deleteEmployee(employeeId, id).then(() => {
+					db.nameDeleteEmployee(employeeId).then(() => {
 						console.log("succesfully deleted employee")
 					}).then(() => promptUser())
 				})
