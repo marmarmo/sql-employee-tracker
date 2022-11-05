@@ -21,6 +21,7 @@ const promptUser = () => {
 			"Add an employee",
 			"Update an employee role",
 			"Update an employee manager",
+			"View employees by manager",
 			"View employees by department",
 			"Delete a department",
 			"Delete a role",
@@ -69,7 +70,7 @@ const promptUser = () => {
 			viewEmployeesMan();
 		}
 		if (choices === "View employees by department") {
-			viewEmployees();
+			viewEmployeesDept();
 		}
 
 		if (choices === "Delete a department") {
@@ -94,7 +95,7 @@ const promptUser = () => {
 	})
 };
 	
-
+//function to view all depts
 const showDepartments = () => {
 db.showDepartments().then(([data]) => {
 	console.table(data);
@@ -134,7 +135,6 @@ const addRole = () => {
 		const departmentChoices = data.map((department) => {
 		return {name: department.department_name, value: department.id}
 		})
-		console.log(departmentChoices)
 		inquirer.prompt([
 			{
 				type: "input",
@@ -166,8 +166,6 @@ const addEmployee = () => {
 		const managerChoices = data.map((employees) => {
 		return {name: `${employees.first_name} ${employees.last_name}`, value: employees.id}
 		})
-
-		console.log(managerChoices)
 	db.showRoles().then(([data]) => {
 		const roleChoices = data.map((roles) => {
 			return {name: roles.job_title, value: roles.id}
@@ -280,24 +278,21 @@ const updateManager = () => {
 						console.log("succesfully updated employee manager")
 					}).then(() => promptUser())
 				})
-				
-
-
 			})
 		})
 	})
 };
 
-//view all employees by manager// need to select manager id
+//view all employees by manager
 const viewEmployeesMan = () => {
-	db.viewEmployees().then(([data]) => {
+	db.viewEmployeesMan().then(([data]) => {
 		console.table(data);
 	}).then(() => promptUser())
 };
 
 //view all employees by department
-const viewEmployees = () => {
-	db.viewEmployees().then(([data]) => {
+const viewEmployeesDept = () => {
+	db.viewEmployeesDept().then(([data]) => {
 		console.table(data);
 	}).then(() => promptUser())
 };
@@ -328,9 +323,25 @@ const deleteDepartment = () => {
 //delete a role
 const deleteRole = () => {
 	db.showRoles().then(([data]) => {
-		console.table(data);
-	}).then(() => promptUser())
-};
+		const roleChoices = data.map((roles) => {
+			return {name: roles.job_title, value: roles.id}
+		})
+		console.log(roleChoices)
+		inquirer.prompt([
+			{
+				type: "list",
+				name: "roleId",
+				message: "Which role would you like to delete? You cannot undo this!",
+				choices: roleChoices
+			}
+		])
+		.then(({roleId}) => {
+					db.deleteRole(roleId).then(() => {
+						console.log("succesfully deleted employee")
+					}).then(() => promptUser())
+				})
+			})
+		};
 
 //delete an employee
 const nameDeleteEmployee = () => {
