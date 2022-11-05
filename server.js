@@ -251,7 +251,6 @@ const updateEmployeeRole = () => {
         value: employee.id,
       };
     });
-    console.log(employeeChoices);
     inquirer
       .prompt([
         {
@@ -297,7 +296,6 @@ const updateManager = () => {
         value: employee.id,
       };
     });
-    console.log(employeeChoices);
     inquirer
       .prompt([
         {
@@ -360,7 +358,6 @@ const deleteDepartment = () => {
     const departmentChoices = data.map((department) => {
       return { name: department.department_name, value: department.id };
     });
-    console.log(departmentChoices);
     inquirer
       .prompt([
         {
@@ -387,7 +384,6 @@ const deleteRole = () => {
     const roleChoices = data.map((roles) => {
       return { name: roles.job_title, value: roles.id };
     });
-    console.log(roleChoices);
     inquirer
       .prompt([
         {
@@ -416,7 +412,6 @@ const deleteEmployee = () => {
         value: employee.id,
       };
     });
-    console.log(employeeChoices);
     inquirer
       .prompt([
         {
