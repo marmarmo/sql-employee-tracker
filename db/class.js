@@ -49,6 +49,19 @@ class EmployeeTracker {
 	getManagers (id) {
 		return this.db.promise().query("SELECT * FROM employees WHERE id != ?", id)
 	}
+	viewEmployeesMan () {
+		return this.db.promise().query("")
+	}
+	viewEmployees () {
+		return this.db.promise().query("SELECT employees.first_name, employees.last_name, departments.department_name AS departments FROM employees LEFT JOIN roles ON employees.role_id = roles.id LEFT JOIN departments on roles.department_id = departments.id")
+	}
+
+	nameDeleteEmployee (employeeId, id) {
+		return this.db.promise().query("UPDATE employees SET employee_id = ? WHERE id = ?", [employeeId, id])
+	}
+	deleteEmployee (id) {
+		return this.db.promise().query("DELETE * FROM employees WHERE id != ?", id)
+	}
 };
 
 module.exports = new EmployeeTracker(db);
